@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2018, STEREOLABS.
+
+All rights reserved.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<launch>
+
+
+    <!--node name="odomtry_to_tf"  pkg="rtabmap_ros" type="odomtry_to_tf.py" >
+     <remap from="odomtry" to="/zed_node/odom"/>
+     <param name="frame_id" value="odom"/>
+     <param name="child_frame_id" value="base_link"/>
+    </node-->
+      
+    <!-- RTAB-map Node-->
+    <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+   
+      <arg name="rtabmap_args"              value="--delete_db_on_start" />
+      <arg name="rgb_topic"               	value="/zed/zed_node/rgb/image_rect_color" />
+      <arg name="depth_topic"             	value="/zed/zed_node/depth/depth_registered" />
+      <arg name="camera_info_topic"       	value="/zed/zed_node/rgb/camera_info" />
+      <arg name="odom_topic"                value="/zed/zed_node/odom"/>  
+      
+      <arg name="frame_id"                     value="base_link"/> <!-- Fixed frame id, you may set "base_link" or "base_footprint" if they are published -->
+        
+      
+      
+      <arg name="visual_odometry"           value="false" /> 
+      <arg name="use_sim_time"              value="true"/>
+      <arg name="approx_sync"               value="true" />
+	  <arg name="wait_for_transform"       value="0.2"/>
+
+    
+      <arg name="rtabmapviz"                    value="true" />
+      <arg name="rviz"                          value="false" />
+      <arg name="cfg"                     value="/home/lzb/jkw2/catkin_ws/src/rtabmap_ros-master/param/rtabmap.ini" /> 
+    </include>
+</launch>

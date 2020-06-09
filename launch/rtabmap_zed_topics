@@ -1,0 +1,3 @@
+rosbag record /zed/zed_node/rgb/image_rect_color /zed/zed_node/depth/depth_registered /zed/zed_node/rgb/camera_info /zed/zed_node/odom /tf /tf_static
+
+rosparam set /use_sim_time false
